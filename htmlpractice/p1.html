@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>HTML Cheat Sheet</title>
     </head>
+
     <body>
+
         <!-- This is a comment. -->
+        <!-- Click ctrl+F12 on the webpage to see all properties. -->
+
         <!-- We can have 6 headings. -->
          <h1>Heading 1</h1>
          <h2>Heading 2</h2>
@@ -12,21 +17,144 @@
          <h4>Heading 4</h4>
          <h5>Heading 5</h5>
          <h6>Heading 6</h6>
+
         <!-- This is a paragraph. -->
          <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam, et?
          </p>
         <!-- Every 2 paragraphs will have a line gap in between. -->
-         <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, alias.
-         </p>
+
         <!-- The <strong> tag is used for bold, <em> tag is used for italics. -->
          <p>
             <strong>Lorem ipsum dolor sit amet,</strong> consectetur adipisicing elit. <em>Aut, saepe!</em>
          </p>
+
         <!-- The <a href=" "> tag is used to create a link, target="_blank" makes the link open in a new tab. -->
          <p>
             <a href="http://google.com" target="_blank">Click here to open Google.</a>
          </p>
+        <!-- All tags have attributes. Syntax: <tagname attributename="attributevalue"> content </tagname> -->
+
+        <!-- Unordered lists -->
+         <ul>
+            <li>List Item 1</li>
+            <li>List Item 2</li>
+            <li>List Item 3</li>
+         </ul>
+        <!-- Ordered lists -->
+         <ol>
+            <li>List Item 1</li>
+            <li>List Item 2</li>
+            <li>List Item 3</li>
+         </ol>
+
+        <!-- Creating a Table -->
+        <!-- <tr> is used to add a row, <th> for row headings and <td> for row data -->
+         <table>
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>EMail</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Jim</td>
+                    <td>jim@gmail.com</td>
+                    <td>19</td>
+                </tr>
+                <tr>
+                    <td>Kevin</td>
+                    <td>kevin@gmail.com</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>Andy</td>
+                    <td>andy@gmail.com</td>
+                    <td>21</td>
+                </tr>
+            </tbody>
+
+         </table>
+         <br>
+         <hr> <!-- The <hr> tag is used to draw a horizontal line -->
+         <br>
+        
+        <!-- Creating a Form -->
+         <form action="http://youtube.com" method="POST">
+
+            <div>
+                <label>First Name</label>
+                <input type="text" name="firstName" placeholder="Enter First Name">
+            </div>
+
+            <br>
+            <div>
+                <label>E-Mail</label>
+                <input type="email" name="email" placeholder="Enter E-Mail Address"> <!-- type="email" validates that the text entered is a valid email address. -->
+            </div>
+            
+            <br>
+            <div>
+                <label>Message</label>
+                <textarea name="message" placeholder="Your Message Here"></textarea> <!-- textarea is used to create a larger area for entering text. -->
+            </div>
+
+            <br>
+            <div>
+                <label>Gender</label>
+                <select name="gender"> <!-- Creating a select list -->
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <br>
+            <div>
+                <label>Age</label>
+                <input type="number" name="age" value="20">
+            </div>
+
+            <br>
+            <div>
+                <label>Birthday</label>
+                <input type="date" name="birthday">
+            </div>
+
+            <br>
+            <input type="submit" name="submit" value="Submit">
+
+         </form>
+
+        <!-- Buttons -->
+         <br>
+         <button>Click Here</button>
+
+        <!-- Images -->
+         <br><br>
+         <img src="C:\Users\yashk\OneDrive\Desktop\dp.jpg" alt="Image not found." width="200">
+
+        <!-- Quotations -->
+         <blockquote cite="http://gmail.com">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, voluptas!
+         </blockquote>
+
+        <!-- Abbreviations -->
+         <p>
+            <abbr title="World Wide Web">WWW</abbr> is an abbreviation.
+         </p>
+        
+        <!-- Citing -->
+         <p>
+            HTML crash course by <cite>Yash K.  </cite>
+         </p>
+
+        <!-- HTML5 Semantic Tags: <header>, <footer>, <main>, <aside>, <article>, <nav>, <section>, <details>. -->
+
+        <div style="margin-top:500px"></div>
     </body>
+
 </html>
