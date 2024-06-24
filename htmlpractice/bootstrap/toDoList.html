@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To Do List</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .items {
+            border: 1px solid #ccc;
+            padding: 3px;
+            margin: 5px 0;
+            position: relative;
+        }
+        .items span {
+            font-size: xx-large;
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            cursor: pointer;
+            color: red;
+        }
+        #eachtask{
+            font-size: large;
+            margin: 12px;
+        }
+        .edit{
+            margin-left: 1230px;
+        }
+    </style>
+</head>
+
+<body style="margin: 20px; padding: 20px;">
+
+    <form id="taskForm">
+        <h2 class="text-center font-weight-bold">TO DO LIST</h2><br>
+        <div class="text-center">
+            <label for="taskInput">Enter Task: </label>
+            <input type="text" id="taskInput" name="task" required><br><br>
+            <button id="save" class="btn btn-success">Save</button>
+            <button type="button" id="clear" class="btn btn-danger">Clear</button>
+        </div>
+    </form><br>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Edit Task:</label>
+                  <input type="text" id="taskInput" name="task" required>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" id="editTask" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="main"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        let form = document.getElementById("taskForm");
+        let main = document.querySelector(".main");
+        let clear = document.querySelector("#clear");
+
+        document.getElementById("save").addEventListener("click", (event) => {
+            event.preventDefault();
+            let taskInput = document.getElementById("taskInput");
+            let task = taskInput.value.trim();
+            if (task) {
+                let userData = JSON.parse(localStorage.getItem("userDetails")) ?? [];
+                userData.push({ 'task': task });
+                localStorage.setItem("userDetails", JSON.stringify(userData));
+                displayData();
+                taskInput.value = '';
+            }
+        });
+
+        document.getElementById("editTask").addEventListener("click", (event) => {
+            event.preventDefault();
+            let editedInput = document.getElementById("editedInput");
+            let editedtask = editedInput.value.trim();
+            if (editedtask) {
+                let userData = JSON.parse(localStorage.getItem("userDetails")) ?? [];
+                userData['task'] = editedtask;
+                localStorage.setItem("userDetails", JSON.stringify(userData));
+                displayData();
+                editedInput.value = '';
+            }
+        });
+
+        let displayData = () => {
+            let userData = JSON.parse(localStorage.getItem("userDetails")) ?? [];
+            let finalData = '';
+            userData.forEach((element, i) => {
+                finalData += 
+                    `<div class="items">
+                        <span onclick='deleteData(${i})'>&times;</span>
+                        <ul>
+                        <li id="eachtask">
+                            ${element.task}
+                            <button class="edit btn btn-primary" onclick='editTask(${i})' data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
+                        </li>
+                        </ul>
+                    </div><br>`;
+            });
+            main.innerHTML = finalData;
+        }
+
+        let deleteData = (index) => {
+            let userData = JSON.parse(localStorage.getItem("userDetails")) ?? [];
+            userData.splice(index, 1);
+            localStorage.setItem("userDetails", JSON.stringify(userData));
+            displayData();
+        };
+
+        clear.addEventListener("click", () => {
+            localStorage.removeItem("userDetails");
+            displayData();
+        });
+
+        var exampleModal = document.getElementById('exampleModal');
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        var recipient = button.getAttribute('data-bs-whatever');
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        var modalTitle = exampleModal.querySelector('.modal-title');
+        var modalBodyInput = exampleModal.querySelector('.modal-body input');
+
+        modalTitle.textContent = 'New message to ' + recipient;
+        modalBodyInput.value = recipient;
+        });
+
+        displayData();
+    </script>
+
+</body>
+</html>
